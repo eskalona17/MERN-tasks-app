@@ -197,8 +197,6 @@ aside  {
   padding: 4rem;
 }
 
-
-
 .listado-tareas {
   max-width: 600px;
   margin: 0 auto;
@@ -275,8 +273,6 @@ aside  {
   background-color: rgb(170, 0, 0);
   color: var(--blanco);
 }
-
-
 
 .tarea-enter,
 .proyecto-enter {
