@@ -6,6 +6,11 @@ import { FORMULARIO_PROYECTO } from "../../types";
 
 const ProyectoState = (props) => {
   const initalState = {
+    proyectos: [
+      { id: 1, nombre: "Tienda virtual" },
+      { id: 2, nombre: "paco" },
+      { id: 3, nombre: "ramon" },
+    ],
     formulario: false,
   };
 
@@ -22,6 +27,7 @@ const ProyectoState = (props) => {
   return (
     <proyectoContext.Provider
       value={{
+        proyectos: state.proyectos,
         formulario: state.formulario,
         mostrarFormulario,
       }}
