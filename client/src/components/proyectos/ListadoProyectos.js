@@ -10,7 +10,7 @@ const ListadoProyectos = () => {
   return (
     <ul className="listado-proyectos">
       {proyectos.map((proyecto) => (
-        <Proyecto proyecto={proyecto}/>
+        <Proyecto proyecto={proyecto} key={proyecto.nombre}/>
         ))}
     </ul>
   );

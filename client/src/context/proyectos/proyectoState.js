@@ -1,24 +1,34 @@
-import React, { useReducer } from 'react';
+import React, { useReducer } from "react";
 
-import proyectoContext from './proyectoContext';
-import proyectoReducer from './proyectoReducer'
+import proyectoContext from "./proyectoContext";
+import proyectoReducer from "./proyectoReducer";
+import { FORMULARIO_PROYECTO } from "../../types";
 
-const ProyectoState = props => {
-    const initalState = {
-        formulario : false
-    }
+const ProyectoState = (props) => {
+  const initalState = {
+    formulario: false,
+  };
 
-    //dispatch para ejecutar las acciones
-    const [state, dispatch] = useReducer(proyectoReducer, initalState)
+  //dispatch para ejecutar las acciones
+  const [state, dispatch] = useReducer(proyectoReducer, initalState);
 
-    //serie de funciones para el CRUD
-    return(
-        <proyectoContext.Provider value={{
-            formulario: state.formulario
-        }}>
-            {props.children}
-        </proyectoContext.Provider>
-    )
-}
+  //serie de funciones para el CRUD
+  const mostrarFormulario = () => {
+    dispatch({
+      type: FORMULARIO_PROYECTO,
+    });
+  };
 
-export default ProyectoState
+  return (
+    <proyectoContext.Provider
+      value={{
+        formulario: state.formulario,
+        mostrarFormulario,
+      }}
+    >
+      {props.children}
+    </proyectoContext.Provider>
+  );
+};
+
+export default ProyectoState;
