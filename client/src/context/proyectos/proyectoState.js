@@ -8,6 +8,7 @@ import {
   FORMULARIO_PROYECTO,
   OBTENER_PROYECTOS,
   AGREGAR_PROYECTO,
+  VALIDAR_FORMULARIO
 } from "../../types";
 
 const ProyectoState = (props) => {
@@ -19,6 +20,7 @@ const ProyectoState = (props) => {
   const initalState = {
     proyectos: [],
     formulario: false,
+    errorformulario: false
   };
 
   //dispatch para ejecutar las acciones
@@ -52,14 +54,23 @@ const ProyectoState = (props) => {
 
   }
 
+  //validar el formulario por errores
+  const mostrarError = () => {
+    dispatch({
+      type: VALIDAR_FORMULARIO
+    })
+  }
+
   return (
     <proyectoContext.Provider
       value={{
         proyectos: state.proyectos,
         formulario: state.formulario,
+        errorformulario: state.errorformulario,
         mostrarFormulario,
         obtenerProyectos,
-        agregarProyecto
+        agregarProyecto,
+        mostrarError
       }}
     >
       {props.children}
