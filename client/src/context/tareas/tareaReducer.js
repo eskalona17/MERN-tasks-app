@@ -3,6 +3,7 @@ import {
   AGREGAR_TAREA,
   VALIDAR_TAREA,
   ELIMINAR_TAREA,
+  ESTADO_TAREA,
 } from "../../types";
 
 export default (state, action) => {
@@ -17,7 +18,7 @@ export default (state, action) => {
     case AGREGAR_TAREA:
       return {
         ...state,
-        tareas: [...state.tareas, action.payload],
+        tareas: [action.payload, ...state.tareas],
         errortarea: false,
       };
     case VALIDAR_TAREA:
@@ -26,9 +27,14 @@ export default (state, action) => {
         errortarea: true,
       };
     case ELIMINAR_TAREA:
-      return {  
+      return {
         ...state,
         tareas: state.tareas.filter((tarea) => tarea.id !== action.payload),
+      };
+    case ESTADO_TAREA:
+      return {
+        ...state,
+        tareas: state.tareasproyecto.map((tarea) => tarea.id === action.payload.id ? action.payload : tarea),
       };
     default:
       return state;
