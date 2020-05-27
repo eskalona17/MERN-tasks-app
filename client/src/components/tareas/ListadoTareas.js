@@ -32,7 +32,7 @@ const ListadoTareas = () => {
             <p>No hay tareas</p>
           </li>
         ) : tareasproyecto.map(tarea => (
-            <Tarea tarea={tarea} key={tarea.nombre}/>
+            <Tarea tarea={tarea} key={tarea.id}/>
         ))}
         
       </ul>
