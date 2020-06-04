@@ -4,6 +4,11 @@ exports.crearProyecto = async(req, res) => {
     try {
         //crear nuevo proyecto
         const proyecto = new Proyecto(req.body);
+
+        //guardar el creador via jwt
+        proyecto.creador = req.usuario.id;
+
+        //guardamos el proyecto
         proyecto.save();
         res.json(proyecto)
         
