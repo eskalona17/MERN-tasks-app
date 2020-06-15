@@ -27,12 +27,18 @@ const AuthState = (props) => {
       try {
           const respuesta = await clienteAxions.post('/api/usuarios', datos)
           dispatch({
-              type: REGISTRO_EXITO
+              type: REGISTRO_EXITO,
+              payload: respuesta.data
           })
       } catch (error) {
-          console.log(error);
+        //   console.log(error.response.data.msg);
+        const alerta = {
+            msg: error.response.data.msg,
+            categoria: 'alerta-error'
+        }
           dispatch({
-              type: REGISTRO_ERROR
+              type: REGISTRO_ERROR,
+              payload: alerta
           })
       }
   }
