@@ -14,14 +14,13 @@ const NuevaCuenta = (props) => {
 
   //en caso de que el usuario se haya autenticado o registrado o sea un registro duplicado
   useEffect(() => {
-    if(autenticado){
-      props.history.push('/proyectos')
+    if (autenticado) {
+      props.history.push("/proyectos");
     }
-    if(mensaje){
-      mostrarAlerta(mensaje.msg, mensaje.categoria)
+    if (mensaje) {
+      mostrarAlerta(mensaje.msg, mensaje.categoria);
     }
-
-  },[mensaje, autenticado, props.history])
+  }, [mensaje, autenticado, props.history]);
 
   //state para iniciar sesión
   const [usuario, guardarUsuario] = useState({
