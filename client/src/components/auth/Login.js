@@ -1,7 +1,16 @@
-import React, { useState } from "react";
-import {Link} from 'react-router-dom'
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import AlertaContext from "../../context/alertas/alertaContext";
+import AuthContext from "../../context/autenticacion/authContext";
 
 const Login = () => {
+  //extraer los valores del context
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
+
+  const authContext = useContext(AuthContext);
+  const { mensaje, autenticado, iniciarSesion } = authContext;
+
   //state para iniciar sesión
   const [usuario, guardarUsuario] = useState({
     email: "",
@@ -9,24 +18,31 @@ const Login = () => {
   });
 
   //extraer de usuario
-  const {email, password} = usuario
-  const onChange = e => {
+  const { email, password } = usuario;
+  const onChange = (e) => {
     guardarUsuario({
-        ...usuario,
-        [e.target.name]: e.target.value
-    })
+      ...usuario,
+      [e.target.name]: e.target.value,
+    });
   };
 
   //cuando el usuario quiere iniciar sesion
-  const onSubmit = e => {
-      e.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
 
-      //validar que no haya campos vacios
+    //validar que no haya campos vacios
+    if (email.trim() === "" || password.trim() === "") {
+      mostrarAlerta("Todos los campos son obligatorios", "alerta-error");
+    }
 
-      //pasarlo al action
-  }
+    //pasarlo al action
+    iniciarSesion({ email, password });
+  };
   return (
     <div className="form-usuario">
+      {alerta ? (
+        <div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>
+      ) : null}
       <div className="contenedor-form sombra-dark">
         <h1>Iniciar sesión</h1>
         <form onSubmit={onSubmit}>
@@ -60,7 +76,9 @@ const Login = () => {
             />
           </div>
         </form>
-        <Link to={'/nueva-cuenta'} className="enlace-cuenta">Obtener nueva cuenta</Link>
+        <Link to={"/nueva-cuenta"} className="enlace-cuenta">
+          Obtener nueva cuenta
+        </Link>
       </div>
     </div>
   );

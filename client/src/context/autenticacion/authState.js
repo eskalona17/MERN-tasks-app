@@ -69,6 +69,22 @@ const AuthState = (props) => {
     }
   };
 
+  //cuando el usuario inicia sesión
+  const iniciarSesion = async datos => {
+      try {
+          const respuesta = await clienteAxios.post('/api/auth', datos)
+      } catch (error) {
+        const alerta = {
+            msg: error.response.data.msg,
+            categoria: "alerta-error",
+          };
+          dispatch({
+            type: LOGIN_ERROR,
+            payload: alerta,
+          });
+      }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -77,6 +93,7 @@ const AuthState = (props) => {
         usuario: state.usuario,
         mensaje: state.mensaje,
         registrarUsuario,
+        iniciarSesion
       }}
     >
       {props.children}
