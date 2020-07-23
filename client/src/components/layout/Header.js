@@ -5,7 +5,7 @@ const Header = () => {
 
         //extraer la información de autenticación
         const authContext = useContext(AuthContext);
-        const { usuario, usuarioAutenticado } = authContext;
+        const { usuario, cerrarSesion, usuarioAutenticado } = authContext;
     
         useEffect(() => {
             usuarioAutenticado()
@@ -17,7 +17,7 @@ const Header = () => {
             {usuario ? <p className="nombre-usuario">Hola <span>{usuario.nombre}</span></p> : null}
             
             <nav className="nav-principal">
-                <a href="#!">Cerrar sesión</a>
+                <button className="btn btn-blank cerrar-sesion" onClick={() => cerrarSesion()}>Cerrar Sesión</button>
             </nav>
         </header>
      );
